@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+# transfers a file from a client to a server with scp
+file_path=$1
+ip=$2
+username=$3
+ssh_key=$4
+
+if [ "$#" -lt 3 ]; then
+	echo "Usage: 0-transfer_file PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+elif [ "$#" -lt 4 ]; then
+	scp -o StrictHostKeyChecking=no "$file_path" "$username"@"$ip":~/
+else
+	scp -o StrictHostKeyChecking=no -i "$ssh_key" "$file_path" "$username"@"$ip":~/
+
+fi
